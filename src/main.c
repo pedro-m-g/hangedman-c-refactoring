@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "libreria.h"
+#include "hangedman_engine.h"
 
 /* MAIN PRINCIPAL */
 int main()
