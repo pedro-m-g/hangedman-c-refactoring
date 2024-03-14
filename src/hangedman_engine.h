@@ -6,6 +6,8 @@
 #include <ctype.h>
 #include <unistd.h>
 
+#define PHRASES_LENGTH 4
+
 /* PROTOTYPES */
 void go_to_XY(int x, int y);
 void text_to_XY(int x, int y, char *Text);
@@ -28,6 +30,7 @@ void end_game(int status);
 void start_game(int status);
 
 void init_random_seed();
+char **load_phrases();
 
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
@@ -290,4 +293,14 @@ void start_game(int status)
 void init_random_seed()
 {
   srand(time(NULL));
+}
+
+char **load_phrases()
+{
+  char **phrases = (char **)malloc(PHRASES_LENGTH * sizeof(char *));
+  phrases[0] = "COMPUTADORA";
+  phrases[1] = "OTORRINOLARINGOLOGO";
+  phrases[2] = "VISUAL STUDIO CODE";
+  phrases[3] = "LENGUAJE C";
+  return phrases;
 }

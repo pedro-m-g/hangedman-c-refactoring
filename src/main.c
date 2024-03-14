@@ -9,7 +9,7 @@ int main()
 {
   init_random_seed();
 
-  char *phrases[] = {"COMPUTADORA", "OTORRINOLARINGOLOGO", "VISUAL STUDIO CODE", "LENGUAJE C"};
+  char **phrases = load_phrases();
 
   // variables
   int j = 0, k = 0, match = 0;
@@ -34,7 +34,7 @@ int main()
 
     start_game(0);
 
-    strcpy(phrase, phrases[rand() % 4]);
+    strcpy(phrase, phrases[rand() % PHRASES_LENGTH]);
 
     leng = strlen(phrase);
 
