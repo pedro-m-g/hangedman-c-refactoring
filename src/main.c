@@ -27,9 +27,7 @@ int main()
 
   if (game_start_option == GAME_START_OPTION_EXIT)
   {
-    cls();
-    draw_title();
-    show_game_over_screen(GAME_OVER_EXIT);
+    exit_game();
     return 0;
   }
 
