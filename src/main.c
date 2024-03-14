@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdbool.h>
 #include "hangedman_engine.h"
 
 /* MAIN PRINCIPAL */
@@ -10,15 +11,20 @@ int main()
   init_random_seed();
 
   // variables
-  int j = 0, k = 0, match = 0;
-  int real_leng = 0, leng = 0;
-  char phrase[30];
-  char correct_phrase[30];
-  char letter;
+  int hangedman_status = 0;
+  int guessed_letters_quantity = 0;
+  bool phrase_contains_input_character = 0;
+
+  int phrase_length_without_spaces = 0;
+  int full_phrase_length = 0;
+
+  char phrase_to_guess[30];
+  char guessed_phrase[30];
+  char input_character;
   int game_start_option;
   char username[50];
-  int lifes = 6;
-  int points = 0;
+  int lives_left = 6;
+  int score = 0;
 
   draw_title();
   game_start_option = prompt_game_start();
@@ -35,106 +41,104 @@ int main()
 
   show_main_screen(STATUS_PLAYING);
 
-  strcpy(phrase, pick_random_phrase());
+  strcpy(phrase_to_guess, pick_random_phrase());
 
-  leng = strlen(phrase);
+  full_phrase_length = strlen(phrase_to_guess);
 
   // underscore
-  for (int i = 0; i < leng; i++)
+  for (int i = 0; i < full_phrase_length; i++)
   {
-    if (phrase[i] != WHITE_SPACE && phrase[i] != END_OF_STRING)
+    if (phrase_to_guess[i] != WHITE_SPACE && phrase_to_guess[i] != END_OF_STRING)
     {
-      correct_phrase[i] = UNDERSCORE;
-      real_leng++;
+      guessed_phrase[i] = UNDERSCORE;
+      phrase_length_without_spaces++;
     }
     else
     {
-      correct_phrase[i] = WHITE_SPACE;
+      guessed_phrase[i] = WHITE_SPACE;
     }
   }
 
-  correct_phrase[leng] = END_OF_STRING;
+  guessed_phrase[full_phrase_length] = END_OF_STRING;
   go_to_XY(114, 21);
 
-  for (int i = 0; i < leng; i++)
+  for (int i = 0; i < full_phrase_length; i++)
   {
-    printf(OUTPUT_CHARACTER, correct_phrase[i]);
+    printf(OUTPUT_CHARACTER, guessed_phrase[i]);
   }
 
   // heart game
-
-  while (lifes > 0 && k < real_leng)
+  while (lives_left > 0 && guessed_letters_quantity < phrase_length_without_spaces)
   {
-
-    match = 0;
+    phrase_contains_input_character = false;
 
     go_to_XY(10, 10);
     printf(ENTER_NEXT_LETTER_MESSAGE, username);
-    scanf(INPUT_CHARACTER, &letter);
+    scanf(INPUT_CHARACTER, &input_character);
 
     // checking for matches
 
     go_to_XY(114, 21);
 
-    for (int i = 0; i < leng; i++)
+    for (int i = 0; i < full_phrase_length; i++)
     {
-      if ((phrase[i] == letter || phrase[i] == toupper(letter)) && correct_phrase[i] == UNDERSCORE)
+      if ((phrase_to_guess[i] == input_character || phrase_to_guess[i] == toupper(input_character)) && guessed_phrase[i] == UNDERSCORE)
       {
-        correct_phrase[i] = phrase[i];
-        points += 100;
-        k++; // to manage matches
-        match = 1;
+        guessed_phrase[i] = phrase_to_guess[i];
+        score += 100;
+        guessed_letters_quantity++; // to manage matches
+        phrase_contains_input_character = true;
       }
     }
 
     go_to_XY(114, 21);
-    for (int i = 0; i < leng; i++)
+    for (int i = 0; i < full_phrase_length; i++)
     {
-      printf(OUTPUT_CHARACTER, correct_phrase[i]);
+      printf(OUTPUT_CHARACTER, guessed_phrase[i]);
     }
 
-    if (!match)
+    if (!phrase_contains_input_character)
     {
-      if (points > 0)
+      if (score > 0)
       {
-        points = points - 50;
+        score = score - 50;
       }
 
-      int match_already = 0;
-      for (int i = 0; i < leng; i++)
+      bool was_guessed_previously = false;
+      for (int i = 0; i < full_phrase_length; i++)
       {
-        if (correct_phrase[i] == letter)
+        if (guessed_phrase[i] == input_character)
         {
-          match_already = 1;
+          was_guessed_previously = true;
           break;
         }
       }
 
-      if (!match_already)
+      if (!was_guessed_previously)
       {
-        lifes--;
-        draw_gallow(j);
-        j++;
+        lives_left--;
+        draw_gallow(hangedman_status);
+        hangedman_status++;
 
         go_to_XY(90, 27);
-        printf(NOT_FOUND_STATUS_MESSAGE, points, lifes);
+        printf(NOT_FOUND_STATUS_MESSAGE, score, lives_left);
       }
     }
     else
     {
       // show match msg
       go_to_XY(90, 27);
-      printf(FOUND_STATUS_MESSAGE, points, lifes);
+      printf(FOUND_STATUS_MESSAGE, score, lives_left);
     }
   }
 
-  if (lifes == 0)
+  if (lives_left == 0)
   {
     show_game_over_screen(GAME_OVER_LOSE);
   }
 
   show_main_screen(STATUS_GAME_OVER);
-  printf(GAME_OVER_STATUS_MESSAGE, username, points, (real_leng * 100));
+  printf(GAME_OVER_STATUS_MESSAGE, username, score, (phrase_length_without_spaces * 100));
 
   return 0;
 }
