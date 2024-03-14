@@ -42,6 +42,7 @@ void show_main_screen(int status);
 void init_random_seed();
 char **load_phrases();
 void exit_game();
+char *pick_random_phrase();
 
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
@@ -321,4 +322,11 @@ void exit_game()
   cls();
   draw_title();
   show_game_over_screen(GAME_OVER_EXIT);
+}
+
+char *pick_random_phrase()
+{
+  char **phrases = load_phrases();
+  int index = rand() % PHRASES_LENGTH;
+  return phrases[index];
 }

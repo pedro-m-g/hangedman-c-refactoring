@@ -9,8 +9,6 @@ int main()
 {
   init_random_seed();
 
-  char **phrases = load_phrases();
-
   // variables
   int j = 0, k = 0, match = 0;
   int real_leng = 0, leng = 0;
@@ -37,7 +35,7 @@ int main()
 
   show_main_screen(STATUS_PLAYING);
 
-  strcpy(phrase, phrases[rand() % PHRASES_LENGTH]);
+  strcpy(phrase, pick_random_phrase());
 
   leng = strlen(phrase);
 
