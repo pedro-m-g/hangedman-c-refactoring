@@ -8,6 +8,9 @@
 
 #define PHRASES_LENGTH 4
 
+#define GAME_START_OPTION_EXIT 0
+#define GAME_START_OPTION_CONTINUE 1
+
 /* PROTOTYPES */
 void go_to_XY(int x, int y);
 void text_to_XY(int x, int y, char *Text);
@@ -23,7 +26,7 @@ void draw_right_arm();
 void draw_right_leg();
 void draw_left_leg();
 
-int msg();
+int prompt_game_start();
 void cls();
 
 void end_game(int status);
@@ -232,7 +235,7 @@ void draw_right_leg()
 /////// MAIN FUNCTIOS //////////
 //////////////////////////////
 
-int msg()
+int prompt_game_start()
 {
   int op;
   printf("   \nM  E   N   U \n");
