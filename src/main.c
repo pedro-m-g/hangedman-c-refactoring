@@ -32,7 +32,7 @@ int main()
   }
 
   show_main_screen(STATUS_PLAYING);
-  printf("\nIngresa tu usuario\n");
+  printf(ENTER_USERNAME_MESSAGE);
   scanf("%s", &username);
 
   show_main_screen(STATUS_PLAYING);
@@ -71,7 +71,7 @@ int main()
     match = 0;
 
     go_to_XY(10, 10);
-    printf("%s!, Ingresa una LETRA\n", username);
+    printf(ENTER_NEXT_LETTER_MESSAGE, username);
     scanf(" %c", &letter);
 
     // checking for matches
@@ -119,15 +119,14 @@ int main()
         j++;
 
         go_to_XY(90, 27);
-        printf("\n NO ENCONTRADA! -- PUNTOS: %d VIDAS: %d\n", points, lifes);
+        printf(NOT_FOUND_STATUS_MESSAGE, points, lifes);
       }
     }
     else
     {
-
       // show match msg
       go_to_XY(90, 27);
-      printf("\n ENCONTRADA! -- PUNTOS: %d VIDAS: %d\n", points, lifes);
+      printf(FOUND_STATUS_MESSAGE, points, lifes);
     }
   }
 
@@ -137,7 +136,7 @@ int main()
   }
 
   show_main_screen(STATUS_GAME_OVER);
-  printf("\n\n--- Jugador: %s Puntos obtenidos: %d de: %d disponibles. --- \n\n", username, points, (real_leng * 100));
+  printf(GAME_OVER_STATUS_MESSAGE, username, points, (real_leng * 100));
 
   return 0;
 }

@@ -5,6 +5,7 @@
 #include <time.h>
 #include <ctype.h>
 #include <unistd.h>
+#include "messages.h"
 
 #define PHRASES_LENGTH 4
 
