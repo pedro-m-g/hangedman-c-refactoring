@@ -29,7 +29,7 @@ int main()
   {
     cls();
     draw_title();
-    end_game(0);
+    show_game_over_screen(GAME_OVER_EXIT);
     return 0;
   }
 
@@ -135,7 +135,7 @@ int main()
 
   if (lifes == 0)
   {
-    end_game(1);
+    show_game_over_screen(GAME_OVER_LOSE);
   }
 
   start_game(1);

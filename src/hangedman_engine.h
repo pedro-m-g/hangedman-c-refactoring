@@ -11,6 +11,9 @@
 #define GAME_START_OPTION_EXIT 0
 #define GAME_START_OPTION_CONTINUE 1
 
+#define GAME_OVER_EXIT 0
+#define GAME_OVER_LOSE 1
+
 /* PROTOTYPES */
 void go_to_XY(int x, int y);
 void text_to_XY(int x, int y, char *Text);
@@ -29,7 +32,7 @@ void draw_left_leg();
 int prompt_game_start();
 void cls();
 
-void end_game(int status);
+void show_game_over_screen(int status);
 void start_game(int status);
 
 void init_random_seed();
@@ -255,16 +258,16 @@ void cls()
 /////// GAME FUNCTIOS //////////
 //////////////////////////////
 
-void end_game(int status)
+void show_game_over_screen(int status)
 {
   switch (status)
   {
-  case 0:
+  case GAME_OVER_EXIT:
     cls();
     draw_title();
     printf("\n\n GAME OVER \n\n");
     break;
-  case 1:
+  case GAME_OVER_LOSE:
     cls();
     draw_title();
     printf("\n\n GAME OVER: Perdiste todas tus vidas! \n\n");
