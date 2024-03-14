@@ -33,7 +33,7 @@ int main()
 
   show_main_screen(STATUS_PLAYING);
   printf(ENTER_USERNAME_MESSAGE);
-  scanf("%s", &username);
+  scanf(INPUT_STRING, &username);
 
   show_main_screen(STATUS_PLAYING);
 
@@ -44,23 +44,23 @@ int main()
   // underscore
   for (int i = 0; i < leng; i++)
   {
-    if (phrase[i] != ' ' && phrase[i] != '\0')
+    if (phrase[i] != WHITE_SPACE && phrase[i] != END_OF_STRING)
     {
-      correct_phrase[i] = '_';
+      correct_phrase[i] = UNDERSCORE;
       real_leng++;
     }
     else
     {
-      correct_phrase[i] = ' ';
+      correct_phrase[i] = WHITE_SPACE;
     }
   }
 
-  correct_phrase[leng] = '\0';
+  correct_phrase[leng] = END_OF_STRING;
   go_to_XY(114, 21);
 
   for (int i = 0; i < leng; i++)
   {
-    printf("%c ", correct_phrase[i]);
+    printf(OUTPUT_CHARACTER, correct_phrase[i]);
   }
 
   // heart game
@@ -72,7 +72,7 @@ int main()
 
     go_to_XY(10, 10);
     printf(ENTER_NEXT_LETTER_MESSAGE, username);
-    scanf(" %c", &letter);
+    scanf(INPUT_CHARACTER, &letter);
 
     // checking for matches
 
@@ -80,7 +80,7 @@ int main()
 
     for (int i = 0; i < leng; i++)
     {
-      if ((phrase[i] == letter || phrase[i] == toupper(letter)) && correct_phrase[i] == '_')
+      if ((phrase[i] == letter || phrase[i] == toupper(letter)) && correct_phrase[i] == UNDERSCORE)
       {
         correct_phrase[i] = phrase[i];
         points += 100;
@@ -92,7 +92,7 @@ int main()
     go_to_XY(114, 21);
     for (int i = 0; i < leng; i++)
     {
-      printf("%c ", correct_phrase[i]);
+      printf(OUTPUT_CHARACTER, correct_phrase[i]);
     }
 
     if (!match)
