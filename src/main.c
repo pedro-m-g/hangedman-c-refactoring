@@ -7,7 +7,7 @@
 /* MAIN PRINCIPAL */
 int main()
 {
-  srand(time(NULL));
+  init_random_seed();
 
   char *phrases[] = {"COMPUTADORA", "OTORRINOLARINGOLOGO", "VISUAL STUDIO CODE", "LENGUAJE C"};
 

@@ -27,6 +27,8 @@ void cls();
 void end_game(int status);
 void start_game(int status);
 
+void init_random_seed();
+
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
 //////////////////////////////
@@ -283,4 +285,9 @@ void start_game(int status)
   default:
     break;
   }
+}
+
+void init_random_seed()
+{
+  srand(time(NULL));
 }
