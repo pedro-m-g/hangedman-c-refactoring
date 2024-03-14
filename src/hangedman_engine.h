@@ -14,6 +14,9 @@
 #define GAME_OVER_EXIT 0
 #define GAME_OVER_LOSE 1
 
+#define STATUS_PLAYING 0
+#define STATUS_GAME_OVER 1
+
 /* PROTOTYPES */
 void go_to_XY(int x, int y);
 void text_to_XY(int x, int y, char *Text);
@@ -33,7 +36,7 @@ int prompt_game_start();
 void cls();
 
 void show_game_over_screen(int status);
-void start_game(int status);
+void show_main_screen(int status);
 
 void init_random_seed();
 char **load_phrases();
@@ -278,16 +281,16 @@ void show_game_over_screen(int status)
   }
 }
 
-void start_game(int status)
+void show_main_screen(int status)
 {
   switch (status)
   {
-  case 0:
+  case STATUS_PLAYING:
     cls();
     draw_title();
     draw_gallow(6);
     break;
-  case 1:
+  case STATUS_GAME_OVER:
     cls();
     draw_title();
     break;

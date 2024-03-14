@@ -33,11 +33,11 @@ int main()
     return 0;
   }
 
-  start_game(0);
+  show_main_screen(STATUS_PLAYING);
   printf("\nIngresa tu usuario\n");
   scanf("%s", &username);
 
-  start_game(0);
+  show_main_screen(STATUS_PLAYING);
 
   strcpy(phrase, phrases[rand() % PHRASES_LENGTH]);
 
@@ -138,7 +138,7 @@ int main()
     show_game_over_screen(GAME_OVER_LOSE);
   }
 
-  start_game(1);
+  show_main_screen(STATUS_GAME_OVER);
   printf("\n\n--- Jugador: %s Puntos obtenidos: %d de: %d disponibles. --- \n\n", username, points, (real_leng * 100));
 
   return 0;
