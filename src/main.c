@@ -26,6 +26,7 @@ int main()
   int lives_left = 6;
   int score = 0;
 
+  cls();
   draw_title();
   game_start_option = prompt_game_start();
 
