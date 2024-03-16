@@ -44,6 +44,7 @@ char **load_phrases();
 void exit_game();
 char *pick_random_phrase();
 char *str_to_underscores(char *str);
+void print_phrase(char *phrase);
 
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
