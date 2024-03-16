@@ -43,6 +43,7 @@ void init_random_seed();
 char **load_phrases();
 void exit_game();
 char *pick_random_phrase();
+char *str_to_underscores(char *str);
 
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
@@ -329,4 +330,36 @@ char *pick_random_phrase()
   char **phrases = load_phrases();
   int index = rand() % PHRASES_LENGTH;
   return phrases[index];
+}
+
+char *str_to_underscores(char *str)
+{
+  int length = strlen(str);
+  char *underscores = (char *)malloc(length * sizeof(char));
+  for (int i = 0; i < length; i++)
+  {
+    if (str[i] != WHITE_SPACE && str[i] != END_OF_STRING)
+    {
+      underscores[i] = UNDERSCORE;
+    }
+    else
+    {
+      underscores[i] = WHITE_SPACE;
+    }
+  }
+  return underscores;
+}
+
+int underscores_length(char *underscores_str)
+{
+  int original_length = strlen(underscores_str);
+  int output_length = 0;
+  for (int i = 0; i < original_length; i++)
+  {
+    if (str[i] == UNDERSCORE)
+    {
+      output_length++;
+    }
+  }
+  return output_length;
 }

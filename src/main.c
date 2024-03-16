@@ -46,19 +46,8 @@ int main()
 
   full_phrase_length = strlen(phrase_to_guess);
 
-  // underscore
-  for (int i = 0; i < full_phrase_length; i++)
-  {
-    if (phrase_to_guess[i] != WHITE_SPACE && phrase_to_guess[i] != END_OF_STRING)
-    {
-      guessed_phrase[i] = UNDERSCORE;
-      phrase_length_without_spaces++;
-    }
-    else
-    {
-      guessed_phrase[i] = WHITE_SPACE;
-    }
-  }
+  strcpy(guessed_phrase, str_to_underscores(phrase_to_guess));
+  phrase_length_without_spaces = underscores_length(guessed_phrase);
 
   guessed_phrase[full_phrase_length] = END_OF_STRING;
   go_to_XY(114, 21);
