@@ -363,3 +363,12 @@ int underscores_length(char *underscores_str)
   }
   return output_length;
 }
+
+void print_phrase(char *phrase)
+{
+  int length = strlen(phrase);
+  for (int i = 0; i < length; i++)
+  {
+    printf(OUTPUT_CHARACTER, phrase[i]);
+  }
+}

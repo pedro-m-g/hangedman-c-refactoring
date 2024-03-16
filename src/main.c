@@ -52,10 +52,7 @@ int main()
   guessed_phrase[full_phrase_length] = END_OF_STRING;
   go_to_XY(114, 21);
 
-  for (int i = 0; i < full_phrase_length; i++)
-  {
-    printf(OUTPUT_CHARACTER, guessed_phrase[i]);
-  }
+  print_phrase(guessed_phrase);
 
   // heart game
   while (lives_left > 0 && guessed_letters_quantity < phrase_length_without_spaces)
@@ -82,10 +79,7 @@ int main()
     }
 
     go_to_XY(114, 21);
-    for (int i = 0; i < full_phrase_length; i++)
-    {
-      printf(OUTPUT_CHARACTER, guessed_phrase[i]);
-    }
+    print_phrase(guessed_phrase);
 
     if (!phrase_contains_input_character)
     {
