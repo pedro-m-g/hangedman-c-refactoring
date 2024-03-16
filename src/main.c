@@ -64,18 +64,17 @@ int main()
     scanf(INPUT_CHARACTER, &input_character);
 
     // checking for matches
-
     go_to_XY(114, 21);
 
-    for (int i = 0; i < full_phrase_length; i++)
+    char *phrase_without_spaces = str_excluding_spaces(phrase_to_guess);
+    int letter_index = str_index_ignoring_case(phrase_without_spaces, input_character);
+    phrase_contains_input_character = letter_index == INDEX_NOT_FOUND;
+
+    if (phrase_contains_input_character)
     {
-      if ((phrase_to_guess[i] == input_character || phrase_to_guess[i] == toupper(input_character)) && guessed_phrase[i] == UNDERSCORE)
-      {
-        guessed_phrase[i] = phrase_to_guess[i];
-        score += 100;
-        guessed_letters_quantity++; // to manage matches
-        phrase_contains_input_character = true;
-      }
+      guessed_phrase[letter_index] = phrase_to_guess[letter_index];
+      score += 100;
+      guessed_letters_quantity++; // to manage matches
     }
 
     go_to_XY(114, 21);

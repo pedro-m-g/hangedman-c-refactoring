@@ -5,6 +5,7 @@
 #include <time.h>
 #include <ctype.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include "messages.h"
 
 #define PHRASES_LENGTH 4
@@ -17,6 +18,7 @@
 
 #define STATUS_PLAYING 0
 #define STATUS_GAME_OVER 1
+#define INDEX_NOT_FOUND -1
 
 /* PROTOTYPES */
 void go_to_XY(int x, int y);
@@ -45,6 +47,8 @@ void exit_game();
 char *pick_random_phrase();
 char *str_to_underscores(char *str);
 void print_phrase(char *phrase);
+char *str_excluding_spaces(char *str);
+int str_index_ignoring_case(char *str, char letter);
 
 /////////////////////////////
 /////// GO TO'S FUNCTIOS //////////
@@ -357,7 +361,7 @@ int underscores_length(char *underscores_str)
   int output_length = 0;
   for (int i = 0; i < original_length; i++)
   {
-    if (str[i] == UNDERSCORE)
+    if (underscores_str[i] == UNDERSCORE)
     {
       output_length++;
     }
@@ -372,4 +376,33 @@ void print_phrase(char *phrase)
   {
     printf(OUTPUT_CHARACTER, phrase[i]);
   }
+}
+
+int str_index_ignoring_case(char *str, char letter)
+{
+  int length = strlen(str);
+  for (int i = 0; i < length; i++)
+  {
+    if (str[i] == letter || str[i] == toupper(letter))
+    {
+      return i;
+    }
+  }
+  return INDEX_NOT_FOUND;
+}
+
+char *str_excluding_spaces(char *str)
+{
+  int length = strlen(str);
+  char *str_without_spaces = (char *)malloc(length * sizeof(char));
+  int write_index = 0;
+  for (int i = 0; i < length; i++)
+  {
+    if (str[i] != WHITE_SPACE && str[i] != END_OF_STRING)
+    {
+      str_without_spaces[write_index] = str[i];
+      write_index++;
+    }
+  }
+  return str_without_spaces;
 }
